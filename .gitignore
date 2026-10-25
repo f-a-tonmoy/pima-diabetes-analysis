@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Environments
+.venv/
+venv/
+env/
+.conda/
+.env
+.env.*
+
+# Packaging
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Tooling caches
+.pytest_cache/
+.tox/
+.hypothesis/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Editors and OS
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Generated output. Nothing here is an input to the analysis: `python -m pima`
+# prints to stdout and the notebooks carry their own figures, so anything
+# written to these paths is reproducible and does not belong in the history.
+figures/
+outputs/
+models/
+*.log
+
+# Personal working notes that live alongside the project without being part of
+# it. ARTICLE_GUIDE.md is a cross-project house-style reference with no Pima
+# content. Delete this line if it should ship with the repository.
+ARTICLE_GUIDE.md
+
+# Throwaway preview pages made while checking the report in a browser.
+docs/_tmp*

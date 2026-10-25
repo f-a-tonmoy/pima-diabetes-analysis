@@ -1,0 +1,13 @@
+# Normalise line endings in the repository, check out native.
+* text=auto
+
+# Notebooks and data are compared and executed across platforms; keep them LF
+# so a Windows checkout does not produce a whole-file diff.
+*.ipynb text eol=lf
+*.csv   text eol=lf
+*.py    text eol=lf
+
+# The notebooks carry embedded figures, so by bytes they dwarf the source.
+# Without this, GitHub reports the repository as ~95% Jupyter Notebook and the
+# language bar says nothing useful about the code.
+*.ipynb linguist-documentation

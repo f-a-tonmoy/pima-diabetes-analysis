@@ -1,0 +1,349 @@
+/* Report styling.
+   Identity for this piece: Fraunces + Public Sans, sea green and clay on warm
+   off-white, figures set directly on the page ground and separated by hairline
+   rules rather than sitting in cards. */
+
+:root {
+  --ground: #fdfcf8;
+  /* one ground for the whole page: no banded intro, no tinted footer */
+  --band: var(--ground);
+  --ink: #1a1a17;
+  --ink-soft: #5d5c55;
+  --ink-faint: #8a887e;
+  --rule: #e2ded4;
+
+  --green: #2e8b57;
+  --violet: #8250c4;
+  --clay: #d2492a;
+  --blue: #2f6fd0;
+  --gold: #b8860b;
+
+  --column: 44rem;
+  --wide: 58rem;
+  --gap: 3rem;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: "Public Sans", system-ui, -apple-system, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.column { width: min(100% - 2.5rem, var(--column)); margin-inline: auto; }
+.wide   { width: min(100% - 2.5rem, var(--wide));   margin-inline: auto; }
+
+/* ---------------------------------------------------------------- nav */
+.section-nav ol { list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 0.55rem; }
+.section-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: calc(50% + var(--column) / 2 + var(--gap));
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  font-size: 0.8125rem;
+}
+.section-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+.section-nav .num {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-left: 2px solid var(--rule);
+  padding-left: 0.6rem;
+  transition: border-color 0.18s, color 0.18s;
+}
+.section-nav .label {
+  opacity: 0;
+  transform: translateX(-0.4rem);
+  transition: opacity 0.18s, transform 0.18s;
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.section-nav a:hover .label,
+.section-nav a:focus-visible .label,
+.section-nav a.active .label { opacity: 1; transform: none; }
+.section-nav a:hover .num,
+.section-nav a.active .num { color: var(--green); border-color: var(--green); }
+.section-nav a.active { color: var(--ink); }
+
+/* the nav lives in the gutter; when there is no gutter it goes away */
+@media (max-width: 1180px) { .section-nav { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .section-nav .label, .section-nav .num { transition: none; }
+}
+
+/* ---------------------------------------------------------------- intro */
+.intro {
+  padding: 4.5rem 0 2.25rem;
+}
+.kicker {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin: 0 0 1.1rem;
+}
+h1 {
+  font-family: Fraunces, Georgia, serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-size: clamp(2.1rem, 6vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0 0 1rem;
+  /* keep the two lines close in length instead of leaving one orphan word */
+  text-wrap: balance;
+}
+h1 .nb { white-space: nowrap; }
+.deck {
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0 0 1.6rem;
+  max-width: 34rem;
+}
+.byline {
+  font-size: 0.9375rem;
+  color: var(--ink-faint);
+  margin: 0;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--rule);
+}
+.intro .deck { margin-bottom: 1.8rem; }
+.byline a { color: var(--ink-soft); text-decoration: none; border-bottom: 1px solid var(--rule); }
+.byline a:hover { color: var(--green); border-color: var(--green); }
+
+/* ---------------------------------------------------------------- body */
+main { padding: 1rem 0 0; }
+section { padding-bottom: 3.25rem; }
+
+.section-kicker {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--ink-faint);
+  margin: 0 0 0.7rem; padding-top: 2.5rem; border-top: 1px solid var(--rule);
+}
+/* names the stage of work, so the reader knows which part of the project
+   a section belongs to without reading it */
+.section-kicker .phase { color: var(--green); }
+.section-kicker .sep { margin: 0 0.45rem; color: var(--ink-faint); }
+
+#summary { padding-bottom: 2.5rem; border-bottom: 1px solid var(--rule); }
+.summary-h { font-size: 1.35rem; margin-bottom: 1.1rem; }
+#summary p { margin-bottom: 0.95rem; }
+#summary strong { color: var(--green); }
+h2 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600; font-size: clamp(1.5rem, 3.4vw, 2rem);
+  line-height: 1.18; letter-spacing: -0.01em; margin: 0 0 1.2rem;
+}
+h3 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600; font-size: 1.2rem; margin: 2.2rem 0 0.8rem;
+}
+p { margin: 0 0 1.15rem; }
+strong { font-weight: 600; }
+a.term {
+  color: inherit; text-decoration: none;
+  border-bottom: 1px dotted var(--green);
+}
+a.term:hover { border-bottom-style: solid; color: var(--green); }
+code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.875em; background: #f3f0e7; padding: 0.1em 0.35em; border-radius: 3px;
+}
+.lead { font-size: 1.15rem; color: var(--ink-soft); }
+
+.pullquote {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.5rem; line-height: 1.35; font-weight: 500;
+  color: var(--green); border-left: 3px solid var(--green);
+  padding: 0.3rem 0 0.3rem 1.5rem; margin: 2.4rem 0;
+}
+
+ol.recap { counter-reset: recap; list-style: none; padding: 0; margin: 0; }
+ol.recap li {
+  counter-increment: recap; position: relative;
+  padding: 1.1rem 0 1.1rem 3rem; border-top: 1px solid var(--rule);
+}
+ol.recap li::before {
+  content: counter(recap, decimal-leading-zero);
+  position: absolute; left: 0; top: 1.15rem;
+  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; color: var(--green);
+  font-variant-numeric: tabular-nums;
+}
+ul.plain { padding-left: 1.15rem; margin: 0 0 1.15rem; }
+ul.plain li { margin-bottom: 0.6rem; }
+
+/* ---------------------------------------------------------------- figures */
+figure {
+  margin: 2.4rem 0 2.6rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+figure .fig-title {
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.1rem; font-weight: 600; line-height: 1.3; margin: 0 0 0.45rem;
+}
+/* The direction-of-good line. Sits above the marks, at body size, in the
+   palette, and is deliberately not styled like the caption. */
+figure .howto {
+  font-size: 1rem; font-weight: 500; line-height: 1.45;
+  color: var(--green); margin: 0 0 1.1rem;
+  padding-left: 0.85rem; border-left: 2px solid var(--green);
+}
+figure .chart { margin: 0; }
+figure .chart > div { max-width: 100%; }
+/* Dragging is disabled on every chart, but Plotly leaves a crosshair on its
+   drag layer, which advertises a gesture that no longer does anything. */
+figure .chart .nsewdrag,
+figure .chart .drag { cursor: default !important; }
+figcaption {
+  font-size: 0.875rem; line-height: 1.55; color: var(--ink-faint);
+  margin-top: 0.9rem;
+}
+
+table.data {
+  width: 100%; border-collapse: collapse; font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+}
+.table-scroll { overflow-x: auto; margin: 1.5rem 0; }
+table.data th {
+  text-align: left; font-weight: 600; font-size: 0.8125rem;
+  letter-spacing: 0.03em; color: var(--ink-soft);
+  border-bottom: 1.5px solid var(--ink-soft); padding: 0.5rem 0.9rem 0.5rem 0;
+  white-space: nowrap;
+}
+table.data td { padding: 0.55rem 0.9rem 0.55rem 0; border-bottom: 1px solid var(--rule); }
+table.data td.num, table.data th.num { text-align: right; }
+
+/* ---------------------------------------------------------------- footer */
+footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 3rem; padding: 3.5rem 0 4rem;
+  font-size: 0.9375rem; color: var(--ink);
+}
+/* Small letter-spaced labels: the footer is reference material, so its headings
+   mark sections without competing with the report's serif headings. */
+footer h2 {
+  font-family: "Public Sans", system-ui, sans-serif;
+  font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink);
+  margin: 2.75rem 0 1rem;
+}
+footer .column > h2:first-child { margin-top: 0; }
+footer ol { padding-left: 1.3rem; }
+footer li { margin-bottom: 0.75rem; }
+footer a { color: var(--green); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+.colophon {
+  margin-top: 2.75rem; padding: 1.5rem 0;
+  border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+}
+.colophon p { margin: 0 0 0.4rem; }
+.colophon p:last-child { margin-bottom: 0; }
+.colophon .lbl { color: var(--ink-soft); }
+.colophon strong { font-weight: 600; }
+.closing { margin: 1.5rem 0 0; font-size: 1rem; }
+.closing strong { color: var(--green); font-weight: 700; }
+
+/* ---------------------------------------------------------------- reveal */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+@media (max-width: 640px) {
+  body { font-size: 1rem; }
+  .intro { padding: 3rem 0 2.25rem; }
+  .stat .v { font-size: 1.7rem; }
+  figure .howto { font-size: 0.9375rem; }
+}
+
+/* ---------------------------------------------------------------- lede */
+.lede {
+  font-family: Fraunces, Georgia, serif;
+  font-size: clamp(1.3rem, 2.6vw, 1.6rem);
+  line-height: 1.42;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  margin: 0 0 1.6rem;
+}
+/* Small-caps opening, the usual magazine device for handing off from the
+   lede to the body. Applies to the first few words only. */
+.opener { margin-bottom: 2.2rem; }
+.sc {
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------- citations */
+sup.cite { line-height: 0; font-size: 0.68em; }
+sup.cite a {
+  color: var(--green);
+  text-decoration: none;
+  padding: 0 0.1em;
+  font-weight: 600;
+}
+sup.cite a:hover { text-decoration: underline; }
+
+ol.sources { padding-left: 1.4rem; }
+ol.sources li { margin-bottom: 1rem; }
+ol.sources li:target { background: #f2efe4; }
+ol.sources .what { color: var(--ink-soft); }
+/* links show a bare domain, short enough never to need breaking */
+ol.sources a { white-space: nowrap; }
+
+/* Back to top. Visible by default so it still works without JavaScript;
+   the script hides it while the reader is near the top. */
+.totop {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--ground);
+  border: 1px solid var(--rule);
+  color: var(--ink-faint);
+  font-size: 1.15rem;
+  line-height: 1;
+  text-decoration: none;
+  box-shadow: 0 2px 10px rgba(26, 26, 23, 0.08);
+  transition: opacity 0.25s, transform 0.25s, color 0.18s, border-color 0.18s;
+}
+.totop:hover { color: var(--green); border-color: var(--green); }
+.totop.is-off { opacity: 0; transform: translateY(0.6rem); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .totop { transition: none; } }
+
+@media (max-width: 640px) {
+  .lede { font-size: 1.2rem; }
+}
