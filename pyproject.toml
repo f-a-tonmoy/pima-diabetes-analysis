@@ -12,7 +12,10 @@ dependencies = [
     "pandas>=2.2",
     "matplotlib>=3.8",
     "seaborn>=0.13",
-    "scikit-learn>=1.5",
+    # 1.9 deprecates SVC(probability=True), which the SVM entry in models.py uses.
+    # Results were verified on 1.5 and 1.8; lift the cap after moving that entry
+    # to CalibratedClassifierCV(SVC(), ensemble=False) and re-checking the numbers.
+    "scikit-learn>=1.5,<1.9",
 ]
 
 [project.optional-dependencies]
